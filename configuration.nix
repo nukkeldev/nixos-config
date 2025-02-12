@@ -3,7 +3,10 @@
 {
   imports =
     [
+      # Generated Hardware Configuration
       ./hardware-configuration.nix
+      
+      # Home Manager
       <home-manager/nixos>
     ];
 
@@ -54,8 +57,16 @@
     enable = true;
     wayland.enable = true;
     package = pkgs.kdePackages.sddm;
-    
+
     theme = "where_is_my_sddm_theme";
+  };
+  
+  boot.kernelParams = [
+    "mem_sleep_default=deep"
+  ];
+  services.fwupd.enable = true;
+  services.logind = {
+    lidSwitch = "hibernate";
   };
 
   # Hyprland
@@ -103,7 +114,7 @@
       bashrcExtra = ''
         alias ssh-login="ssh-add ~/.ssh/id_ed25519"
 
-        alias nec="export WAYLAND_DISPLAY=wayland-1 && sudo -E $EDITOR /etc/nixos/configuration.nix"
+        alias nec="$EDITOR /etc/nixos/configuration.nix"
 	alias nrs="sudo nixos-rebuild switch"
       '';
     };
