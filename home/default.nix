@@ -7,7 +7,8 @@
 
   # Imports
   imports = [
-    ./programs.nix ./packages.nix
+    ./packages.nix
+    ./programs.nix 
   ];
 
   # Environment
