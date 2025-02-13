@@ -10,7 +10,7 @@ let
     htop inxi # System Information
 
     # Hardware Interaction
-    usbutils upower dbus
+    usbutils upower
     lshw powertop
 
     wl-clipboard # Clipboard
@@ -28,13 +28,13 @@ let
      pavucontrol # Audio
      networkmanagerapplet # Networking
      kdePackages.gwenview feh # Image Viewers
-     dolphin # File Explorer
+     nemo # File Explorer
   ];
 
   desktop = with pkgs; [
     dunst # Notifications
     libsecret keepassxc # Shhh
-    hyprlock hypridle hyprpaper # Hypr*
+    hyprlock hypridle hyprpaper hyprpicker hyprshot # Hypr*
   ];
 in
 {

@@ -1,6 +1,9 @@
 { config, pkgs, ... }: {
   imports = [ ./john-hardware-configuration.nix ];
-  
+ 
+  # Flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
@@ -8,17 +11,16 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.device = "nodev";
+  boot.resumeDevice = "/dev/disk/by-partlabel/swap";
 
   boot.loader.grub.theme = pkgs.catppuccin-grub;
+
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_13;
   hardware.enableRedistributableFirmware = true;
-
-  systemd.targets.sleep.enable = false;
-  systemd.targets.suspend.enable = false;
-  systemd.targets.hibernate.enable = true;
-  systemd.targets.hybrid-sleep.enable = false;
 
   # Networking
   networking.hostName = "john";
@@ -53,9 +55,6 @@
     theme = "where_is_my_sddm_theme";
   };
   
-  boot.kernelParams = [
-    "mem_sleep_default=deep"
-  ];
   services.fwupd.enable = true;
   services.logind = {
     lidSwitch = "hibernate";
@@ -101,6 +100,8 @@
       };
     })
   ];
+
+  fonts.packages = with pkgs; [ nerdfonts ];
 
   # PERMANENT
   system.stateVersion = "24.11";
