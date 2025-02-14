@@ -1,4 +1,7 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
+  # Imports
+  imports = [ inputs.nixvim.homeManagerModules.nixvim ];
+
   # Browser
   programs.firefox.enable = true;
 
@@ -24,5 +27,13 @@
         helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
       };
     };
+  };
+
+  # Nixvim
+  programs.nixvim = {
+    enable = true;
+  
+    colorschemes.catppuccin.enable = true;
+    plugins.lualine.enable = true;
   };
 }

@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, inputs, ... }:
 {
   # User
   home.username = "ethw";

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   term = with pkgs; [
@@ -17,7 +17,6 @@ let
   ];
 
   dev = with pkgs; [
-    neovim # Default editor
     jetbrains.idea-community-bin # As a fallback for Java
     vscodium # As a default fallback
   
