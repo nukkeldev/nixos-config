@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 let
   term = with pkgs; [
@@ -9,6 +9,8 @@ let
     neofetch # Diagnostic(ish)
     htop inxi # System Information
 
+    ripgrep
+
     # Hardware Interaction
     usbutils upower
     lshw powertop
@@ -18,9 +20,14 @@ let
 
   dev = with pkgs; [
     jetbrains.idea-community-bin # As a fallback for Java
+    java-language-server
     vscodium # As a default fallback
-  
+
+    cachix devenv
+
     git lazygit gh # Project Management
+
+    nixfmt-rfc-style # Formatters
   ];
 
   guis = with pkgs; [

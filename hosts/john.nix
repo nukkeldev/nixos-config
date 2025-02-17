@@ -1,6 +1,8 @@
 { config, pkgs, ... }: {
   imports = [ ./john-hardware-configuration.nix ];
- 
+
+  nix.settings.trusted-users = [ "root" "ethw" ];
+
   # Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
