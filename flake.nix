@@ -17,11 +17,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nix Vim
-    nixvim = {
-        url = "github:nix-community/nixvim/nixos-24.11";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nvix
+    nvix.url = "github:niksingh710/nvix";
   };
 
   outputs = { nixpkgs, home-manager, ... }@inputs: {

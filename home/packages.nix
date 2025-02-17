@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   term = with pkgs; [
@@ -19,6 +19,7 @@ let
   ];
 
   dev = with pkgs; [
+    inputs.nvix.packages.${pkgs.system}.core
     jetbrains.idea-community-bin # As a fallback for Java
     java-language-server
     vscodium # As a default fallback
