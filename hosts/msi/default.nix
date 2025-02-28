@@ -1,10 +1,19 @@
-{ config, pkgs, ... }: {
-  imports = [ ./john-hardware-configuration.nix ];
+user-args:
+{ config, pkgs, ... }:
+{
+  imports = [ ./hardware-configuration.nix ];
 
-  nix.settings.trusted-users = [ "root" "ethw" ];
+  # Trusted Users
+  nix.settings.trusted-users = [
+    "root"
+    "ethw"
+  ];
 
-  # Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Enable Flakes
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
@@ -17,19 +26,23 @@
 
   boot.loader.grub.theme = pkgs.catppuccin-grub;
 
-  systemd.targets.suspend.enable = false;
-  systemd.targets.hybrid-sleep.enable = false;
-
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_13;
   hardware.enableRedistributableFirmware = true;
 
   # Networking
-  networking.hostName = "john";
+  networking.hostName = "msi";
   networking.networkmanager.enable = true;
-  
+
+  # Disable Suspending
   # TODO: wlp85s0f0 is unavailable after suspending for some reason; haven't been able to fix.
   #       Forcing hibernation as a fix, which works perfectly from my limited testing.
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+  
+  services.logind = {
+    lidSwitch = "hibernate";
+  };
 
   # Wireguard
   networking.wireguard.enable = true;
@@ -56,11 +69,8 @@
 
     theme = "where_is_my_sddm_theme";
   };
-  
+
   services.fwupd.enable = true;
-  services.logind = {
-    lidSwitch = "hibernate";
-  };
 
   # Hyprland [TODO: Migrate to home.nix]
   programs.hyprland.enable = true;
@@ -83,10 +93,23 @@
   # Touchpad
   services.libinput.enable = true;
 
+  # SSH
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      AllowUsers = [ user-args.username ];
+      UseDns = true;
+    };
+  };
+
   # Users
-  users.users.ethw = {
+  users.users.${user-args.username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
   };
 
   # Global Packages
@@ -95,7 +118,7 @@
     (where-is-my-sddm-theme.override {
       themeConfig.General = {
         backgroundFill = "#1e1e2e";
-     	basicTextColor = "#cdd6f4";
+        basicTextColor = "#cdd6f4";
         passwordCursorColor = "#cdd6f4";
         passwordInputBackground = "#1e1e2e";
         passwordTextColor = "#cdd6f4";
@@ -103,7 +126,11 @@
     })
   ];
 
-  fonts.packages = with pkgs; [ nerdfonts ];
+  # Fonts [TODO: Move to HM]
+  fonts.packages = with pkgs; [
+    nerdfonts
+    _0xproto
+  ];
 
   # PERMANENT
   system.stateVersion = "24.11";
