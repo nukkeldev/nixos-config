@@ -1,50 +1,99 @@
-{ pkgs, inputs, ... }:
-
-let
-  term = with pkgs; [
-    ghostty # Terminal (<3 Zig)
-  ];
-
-  utils = with pkgs; [
-    neofetch # Diagnostic(ish)
-    htop inxi # System Information
-
-    ripgrep
-
-    # Hardware Interaction
-    usbutils upower
-    lshw powertop
-
-    wl-clipboard # Clipboard
-  ];
-
-  dev = with pkgs; [
-    inputs.nvix.packages.${pkgs.system}.core
-    jetbrains.idea-community-bin # As a fallback for Java
-    java-language-server
-    vscodium # As a default fallback
-
-    cachix devenv
-
-    git lazygit gh # Project Management
-
-    nixfmt-rfc-style # Formatters
-  ];
-
-  guis = with pkgs; [
-     pavucontrol # Audio
-     networkmanagerapplet # Networking
-     kdePackages.gwenview feh # Image Viewers
-     nemo # File Explorer
-  ];
-
-  desktop = with pkgs; [
-    dunst # Notifications
-    libsecret keepassxc # Shhh
-    hyprlock hypridle hyprpaper hyprpicker hyprshot # Hypr*
-  ];
-in
 {
-  home.packages = term ++ utils ++ dev ++ guis ++ desktop;
-}
+  pkgs,
+  inputs,
+  nvix,
+  ...
+}:
+{
+  home.packages = with pkgs; [
+    # -- GENERAL --
 
+    # Terminal (<3 Zig)
+    ghostty
+
+    # Diagnostics
+    neofetch
+    inxi
+    usbutils
+    upower
+    lshw
+    powertop
+
+    # Finding
+    ripgrep
+    fzf
+
+    # Networking
+    wget
+    nmap
+
+    # Archives
+    zip
+    unzip
+
+    # Clipboard
+    wl-clipboard
+
+    # Non-Nix Compatibility
+    appimage-run
+
+    # Miscellaneous Utilities
+    killall
+    bat
+
+    # -- DEV --
+
+    # Pre-configured NeoVim
+    nvix.packages.${pkgs.system}.core
+
+    # Other IDEs
+    jetbrains.idea-community-bin
+    vscodium
+
+    # Nix Development Environments
+    cachix
+    devenv
+
+    # Git
+    git
+    lazygit
+    gh
+
+    # LSPs
+    java-language-server
+
+    # Formatters
+    nixfmt-rfc-style
+
+    # -- GUIs --
+
+    # Audio
+    pavucontrol
+
+    # Networking
+    networkmanagerapplet
+
+    # Image Viewers
+    feh
+    kdePackages.gwenview
+
+    # File Explorer
+    nemo
+
+    # -- DESKTOP --
+
+    # Notifications
+    dunst
+
+    # Secrets
+    libsecret
+    keepassxc
+
+    # Hypr*
+    hyprlock
+    hypridle
+    hyprpaper
+    hyprpicker
+    hyprshot
+  ];
+}
