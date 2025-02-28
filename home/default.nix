@@ -7,7 +7,7 @@
   # Imports
   imports = [
     ./packages.nix
-    ./programs.nix 
+    ./programs.nix
   ];
 
   # Environment
@@ -25,4 +25,3 @@
   # Version Locking
   home.stateVersion = "24.11"; # PERMANENT
 }
-

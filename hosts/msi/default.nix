@@ -39,7 +39,7 @@ user-args:
   #       Forcing hibernation as a fix, which works perfectly from my limited testing.
   systemd.targets.suspend.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
-  
+
   services.logind = {
     lidSwitch = "hibernate";
   };

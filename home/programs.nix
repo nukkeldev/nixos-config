@@ -1,19 +1,20 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
+  imports = [ ./modules/waybar ];
+
   # Browser
   programs.firefox.enable = true;
 
   # Shell
   programs.bash = {
     enable = true;
-    bashrcExtra = ''
-      alias ..="cd .."
-      alias ...="cd ../.."
+    shellAliases = {
+      "..." = "cd ../..";
+      ".." = "cd ..";
 
-      alias pyenv="nix-shell ~/nixos-config/shells/pip-shell.nix && export PS1='(py) $PS1'"
-
-      alias nec="cd ~/nixos-config"
-      alias nrs="sudo nixos-rebuild switch"
-    '';
+      "nec" = "nvim ~/nixos-config";
+      "nrs" = "sudo nixos-rebuild switch --flake ~/nixos-config";
+    };
   };
 
   # Git
