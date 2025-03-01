@@ -1,5 +1,27 @@
 [
   {
+    "layer": "top",
+    "position": "top",
+    "reload_style_on_change": true,
+    "modules-left": [
+      "custom/startmenu",
+      "hyprland/window",
+      "pulseaudio",
+      "cpu",
+      "memory",
+      "idle_inhibitor"
+    ],
+    "modules-center": [
+      "hyprland/workspaces"
+    ],
+    "modules-right": [
+      "custom/hyprbindings",
+      "custom/notification",
+      "battery",
+      "tray",
+      "clock",
+      "group/power"
+    ],
     "battery": {
       "format": "{icon} {capacity}%",
       "format-charging": "󰂄 {capacity}%",
@@ -21,22 +43,52 @@
         "critical": 15,
         "warning": 30
       },
-      "tooltip": false
+      "tooltip": true
     },
     "clock": {
-      "format": " {:L%I:%M %p}",
+      "interval": 1,
+      "format": "{:L%I:%M:%S %p}",
       "tooltip": true,
-      "tooltip-format": "<big>{:%A, %d.%B %Y }</big>\n<tt><small>{calendar}</small></tt>"
+      "tooltip-format": "{:%A, %B %d %Y}"
     },
     "cpu": {
       "format": " {usage:2}%",
       "interval": 5,
       "tooltip": true
     },
-    "custom/exit": {
+    "group/power": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 125,
+        "children-class": "not-power",
+        "transition-left-to-right": false
+      },
+      "modules": [
+        "custom/power",
+        "custom/quit",
+        "custom/lock",
+        "custom/reboot"
+      ]
+    },
+    "custom/quit": {
+      "format": "󰗼",
+      "tooltip": false,
+      "on-click": "hyprctl dispatch exit"
+    },
+    "custom/lock": {
+      "format": "󰍁",
+      "tooltip": false,
+      "on-click": "hyprlock"
+    },
+    "custom/reboot": {
+      "format": "󰜉",
+      "tooltip": false,
+      "on-click": "reboot"
+    },
+    "custom/power": {
       "format": "",
-      "on-click": "sleep 0.1 && wlogout",
-      "tooltip": false
+      "tooltip": false,
+      "on-click": "shutdown now"
     },
     "custom/hyprbindings": {
       "format": "󱕴",
@@ -96,31 +148,11 @@
       },
       "tooltip": "true"
     },
-    "layer": "top",
     "memory": {
       "format": " {}%",
       "interval": 5,
       "tooltip": true
     },
-    "modules-center": [
-      "hyprland/workspaces"
-    ],
-    "modules-left": [
-      "custom/startmenu",
-      "hyprland/window",
-      "pulseaudio",
-      "cpu",
-      "memory",
-      "idle_inhibitor"
-    ],
-    "modules-right": [
-      "custom/hyprbindings",
-      "custom/notification",
-      "custom/exit",
-      "battery",
-      "tray",
-      "clock"
-    ],
     "network": {
       "format-disconnected": "󰤮",
       "format-ethernet": " {bandwidthDownOctets}",
@@ -134,7 +166,6 @@
       "format-wifi": "{icon} {signalStrength}%",
       "tooltip": false
     },
-    "position": "top",
     "pulseaudio": {
       "format": "{icon} {volume}% {format_source}",
       "format-bluetooth": "{volume}% {icon} {format_source}",

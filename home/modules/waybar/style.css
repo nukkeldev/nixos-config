@@ -90,8 +90,7 @@ window#waybar {
 tooltip {
   background: @base;
 
-  border: 1px solid salmon;
-  border-radius: 12px;
+  border-radius: 6px;
 }
 
 tooltip label {
@@ -106,11 +105,19 @@ tooltip label {
   margin: 4px 0px 0px;
   margin-left: 8px;
 
-  padding: 0px 18px;
+  padding: 0px 10px;
   border-radius: 6px;
 
   background: @base;
   color: @mauve;
+}
+
+#pulseaudio {
+  padding-right: 16px;
+}
+
+#idle_inhibitor {
+  padding-right: 12px;
 }
 
 #custom-startmenu {
@@ -119,7 +126,7 @@ tooltip label {
   margin: 4px 0px 0px;
   margin-left: 8px;
 
-  padding: 1px 14px 0px 5px;
+  padding: 1px 13px 0px 5px;
   border-radius: 6px;
 
   background: @mauve;
@@ -129,17 +136,26 @@ tooltip label {
 /* Right Buttons */
 
 #custom-hyprbindings, #network, #battery,
-#custom-notification, #tray, #custom-exit {
+#custom-notification, #tray, #custom-power,
+#custom-lock, #custom-reboot, #custom-quit {
   font-weight: bold;
 
   margin: 4px 0px 0px;
   margin-right: 8px;
 
-  padding: 0px 18px;
+  padding: 0px 10px;
   border-radius: 6px;
 
   background: @base;
   color: @mauve;
+}
+
+#custom-power { 
+  padding-right: 14px;
+}
+
+#custom-quit { 
+  padding-right: 12px;
 }
 
 #clock {
