@@ -14,6 +14,8 @@
 
       "nec" = "nvim ~/nixos-config";
       "nrs" = "sudo nixos-rebuild switch --flake ~/nixos-config";
+
+      "DONOTSLEEP" = "systemd-inhibit --what=handle-lid-switch sleep infinity";
     };
   };
 
