@@ -15,6 +15,9 @@ user-args:
     "flakes"
   ];
 
+  # UNFREE :(
+  config.allowUnfree = true;
+
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
@@ -50,6 +53,12 @@ user-args:
   # Power Management
   powerManagement.enable = true;
   services.tlp.enable = true;
+
+  # Media
+  services.udisks2.enable = true;
+  programs.gnome-disks.enable = true;
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
 
   # Performance
   services.thermald.enable = true;
