@@ -18,6 +18,7 @@
     upower
     lshw
     powertop
+    htop
 
     # Finding
     ripgrep
@@ -73,9 +74,10 @@
     # Networking
     networkmanagerapplet
 
-    # Image Viewers
+    # Media Viewers
     feh
     kdePackages.gwenview
+    vlc
 
     # File Explorer
     nemo
