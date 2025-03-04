@@ -135,8 +135,7 @@ tooltip label {
 
 /* Right Buttons */
 
-#custom-hyprbindings, #network, #battery,
-#custom-notification, #tray, #custom-power,
+#network, #battery, #custom-power, #temperature,
 #custom-lock, #custom-reboot, #custom-quit {
   font-weight: bold;
 
@@ -150,11 +149,11 @@ tooltip label {
   color: @mauve;
 }
 
-#custom-power { 
+#custom-power {
   padding-right: 14px;
 }
 
-#custom-quit { 
+#custom-quit {
   padding-right: 12px;
 }
 
