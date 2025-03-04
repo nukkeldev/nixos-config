@@ -1,5 +1,5 @@
 user-args:
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -9,14 +9,16 @@ user-args:
     "ethw"
   ];
 
+  # Allow specific unfree packages
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "idea-ultimate"
+  ];
+
   # Enable Flakes
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
-
-  # UNFREE :(
-  config.allowUnfree = true;
 
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
@@ -31,6 +33,7 @@ user-args:
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_13;
+  boot.kernelParams = [ "perf_event_paranoid=1" "kptr_restrict=0" ];
   hardware.enableRedistributableFirmware = true;
 
   # Networking
