@@ -1,7 +1,7 @@
 {
   pkgs,
-  inputs,
   nvix,
+  lib,
   ...
 }:
 {
@@ -19,6 +19,7 @@
     lshw
     powertop
     htop
+    brightnessctl
 
     # Finding
     ripgrep
@@ -48,7 +49,7 @@
     nvix.packages.${pkgs.system}.core
 
     # Other IDEs
-    jetbrains.idea-community-bin
+    jetbrains.idea-ultimate
     vscodium
 
     # Nix Development Environments
