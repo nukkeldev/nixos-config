@@ -12,6 +12,10 @@ user-args:
   # Allow specific unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "idea-ultimate"
+    "steam"
+    "steam-original"
+    "steam-unwrapped"
+    "steam-run"
   ];
 
   # Enable Flakes
@@ -52,6 +56,7 @@ user-args:
 
   # Wireguard
   networking.wireguard.enable = true;
+  networking.firewall.checkReversePath = "loose";
 
   # Power Management
   powerManagement.enable = true;
@@ -88,6 +93,13 @@ user-args:
   programs.hyprland.enable = true;
   programs.uwsm.enable = true;
   programs.hyprland.withUWSM = true;
+
+  # Virtualization
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["ethw"];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+
 
   # Printing
   services.printing.enable = true;
@@ -143,6 +155,9 @@ user-args:
     nerdfonts
     _0xproto
   ];
+
+  # Steam
+  programs.steam.enable = true;
 
   # PERMANENT
   system.stateVersion = "24.11";
