@@ -136,7 +136,7 @@ tooltip label {
 /* Right Buttons */
 
 #network, #battery, #custom-power, #temperature,
-#custom-lock, #custom-reboot, #custom-quit {
+#custom-lock, #custom-reboot, #custom-quit, #tray {
   font-weight: bold;
 
   margin: 4px 0px 0px;

@@ -17,6 +17,7 @@
     "modules-right": [
       "battery",
       "temperature",
+      "network",
       "tray",
       "clock",
       "group/power"
@@ -46,7 +47,8 @@
       "tooltip": true
     },
     "temperature": {
-      "format": "{temperatureC}°C "
+      "format": "{temperatureC}°C ",
+      "thermal-zone": 4
     },
     "clock": {
       "interval": 1,
@@ -143,7 +145,7 @@
         "󰤨"
       ],
       "format-wifi": "{icon} {signalStrength}%",
-      "tooltip": false
+      "tooltip": true
     },
     "pulseaudio": {
       "format": "{icon} {volume}% {format_source}",
