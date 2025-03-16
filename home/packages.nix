@@ -28,6 +28,7 @@
     # Networking
     wget
     nmap
+    aria2
 
     # Archives
     zip
@@ -82,6 +83,9 @@
 
     # File Explorer
     nemo
+
+    # Virtualization
+    gnome-boxes
 
     # -- DESKTOP --
 
