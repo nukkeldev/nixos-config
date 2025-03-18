@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [ ./modules/waybar ];
+  imports = [ ./modules ];
 
   # Browser
   programs.firefox.enable = true;

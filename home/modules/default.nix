@@ -1,4 +1,7 @@
 { ... }:
 {
-  imports = [ ./waybar ];
+  imports = [
+    ./waybar
+    ./starship
+  ];
 }
