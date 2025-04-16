@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   # User
   home.username = "ethw";
   home.homeDirectory = "/home/ethw";
@@ -12,7 +11,6 @@
 
   # Environment
   home.sessionVariables = {
-    EDITOR = "nvim";
     NIXOS_OZONE_WL = "1";
 
     # TODO: Move this into a shell

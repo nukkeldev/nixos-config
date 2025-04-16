@@ -1,9 +1,27 @@
-{ pkgs, ... }:
-{
-  imports = [ ./modules ];
+{pkgs, ...}: {
+  imports = [./modules];
 
   # Browser
   programs.firefox.enable = true;
+
+  # FZF
+  programs.fzf.enable = true;
+  programs.fd.enable = true;
+
+  # Eza
+  programs.eza.enable = true;
+
+  # Editor
+  programs.helix = {
+    enable = true;
+    defaultEditor = true;
+    settings = {
+      theme = "rose_pine";
+      editor = {
+        line-number = "relative";
+      };
+    };
+  };
 
   # Shell
   programs.bash = {
@@ -12,7 +30,7 @@
       "..." = "cd ../..";
       ".." = "cd ..";
 
-      "nec" = "nvim ~/nixos-config";
+      "nec" = "$EDITOR ~/nixos-config";
       "nrs" = "sudo nixos-rebuild switch --flake ~/nixos-config";
 
       "DONOTSLEEP" = "systemd-inhibit --what=handle-lid-switch sleep infinity";

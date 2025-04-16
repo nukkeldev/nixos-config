@@ -1,7 +1,10 @@
-user-args:
-{ config, pkgs, lib, ... }:
-{
-  imports = [ ./hardware-configuration.nix ];
+user-args: {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  imports = [./hardware-configuration.nix];
 
   # Trusted Users
   nix.settings.trusted-users = [
@@ -10,13 +13,16 @@ user-args:
   ];
 
   # Allow specific unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "idea-ultimate"
-    "steam"
-    "steam-original"
-    "steam-unwrapped"
-    "steam-run"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      # IntelliJ
+      "idea-ultimate"
+      # Steam
+      "steam"
+      "steam-original"
+      "steam-unwrapped"
+      "steam-run"
+    ];
 
   # Enable Flakes
   nix.settings.experimental-features = [
@@ -37,7 +43,7 @@ user-args:
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_13;
-  boot.kernelParams = [ "perf_event_paranoid=1" "kptr_restrict=0" ];
+  boot.kernelParams = ["perf_event_paranoid=1" "kptr_restrict=0"]; # Allow for profiling
   hardware.enableRedistributableFirmware = true;
 
   # Networking
@@ -60,7 +66,6 @@ user-args:
 
   # Power Management
   powerManagement.enable = true;
-  services.tlp.enable = true;
 
   # Media
   services.udisks2.enable = true;
@@ -100,7 +105,6 @@ user-args:
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 
-
   # Printing
   services.printing.enable = true;
 
@@ -120,9 +124,9 @@ user-args:
   # SSH
   services.openssh = {
     enable = true;
-    ports = [ 22 ];
+    ports = [22];
     settings = {
-      AllowUsers = [ user-args.username ];
+      AllowUsers = [user-args.username];
       UseDns = true;
     };
   };
@@ -152,8 +156,8 @@ user-args:
 
   # Fonts [TODO: Move to HM]
   fonts.packages = with pkgs; [
-    nerdfonts
-    _0xproto
+    nerd-fonts._0xproto
+    nerd-fonts.droid-sans-mono
   ];
 
   # Steam

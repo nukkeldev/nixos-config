@@ -3,13 +3,14 @@
   nvix,
   lib,
   ...
-}:
-{
+}: {
   home.packages = with pkgs; [
     # -- GENERAL --
 
     # Terminal (<3 Zig)
     ghostty
+    chromium
+    shader-slang
 
     # Diagnostics
     neofetch
@@ -19,6 +20,8 @@
     lshw
     powertop
     htop
+    btop
+    wavemon
     brightnessctl
 
     # Finding
@@ -43,11 +46,12 @@
     # Miscellaneous Utilities
     killall
     bat
+    inotify-tools
+
+    # Calculators
+    qalculate-gtk
 
     # -- DEV --
-
-    # Pre-configured NeoVim
-    nvix.packages.${pkgs.system}.core
 
     # Other IDEs
     jetbrains.idea-ultimate
