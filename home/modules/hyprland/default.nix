@@ -140,9 +140,9 @@
       ];
 
       windowrule = [
-        "float, title:^KeePassXC$"
-        "center 1, title:^KeePassXC$"        
-        "size 40% 30%, title:^KeePassXC$"
+        "float, title:.*KeePassXC$"
+        "center 1, title:.*KeePassXC$"        
+        "size 40% 30%, title:.*KeePassXC$"
         
         "float, title:^nm-connection-editor$"
         "float, title:^gwenview$"
