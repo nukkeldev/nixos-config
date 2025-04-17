@@ -1,4 +1,4 @@
-{...}: {
+{self, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -82,9 +82,7 @@
         "$mainMod SHIFT, C, exec, hyprpicker"
         "$mainMod SHIFT, B, exec, \"killall hyprpaper ; hyprpaper\""
 
-
-        "$mainMod, tab, exec, wofi --show drun"
-        "$mainMod SHIFT, tab, exec, wofi --show run"
+        "$mainMod, tab, exec, ${self + "/scripts/toggle-wofi.sh"}"
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
