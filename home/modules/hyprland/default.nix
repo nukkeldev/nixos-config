@@ -82,6 +82,10 @@
         "$mainMod SHIFT, C, exec, hyprpicker"
         "$mainMod SHIFT, B, exec, \"killall hyprpaper ; hyprpaper\""
 
+
+        "$mainMod, tab, exec, wofi --show drun"
+        "$mainMod SHIFT, tab, exec, wofi --show run"
+
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
@@ -141,9 +145,9 @@
 
       windowrule = [
         "float, title:.*KeePassXC$"
-        "center 1, title:.*KeePassXC$"        
+        "center 1, title:.*KeePassXC$"
         "size 40% 30%, title:.*KeePassXC$"
-        
+
         "float, title:^nm-connection-editor$"
         "float, title:^gwenview$"
         "suppressevent maximize, class:.*"

@@ -23,6 +23,14 @@
     };
   };
 
+  # App Launcher
+  programs.wofi = {
+    enable = true;
+    settings = {
+      gtk_dark = true; 
+    };
+  };
+
   # Shell
   programs.bash = {
     enable = true;
