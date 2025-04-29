@@ -5,6 +5,7 @@
     settings = {
       gtk_dark = true;
       show = "drun";
+      insensitive = true;
     };
   };
 }

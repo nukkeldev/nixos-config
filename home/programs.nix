@@ -1,5 +1,10 @@
-{pkgs, ...}: {
-  imports = [./modules];
+{
+  pkgs,
+  lib,
+  ...
+}:
+{
+  imports = [ ./modules ];
 
   # Browser
   programs.firefox.enable = true;
@@ -11,6 +16,9 @@
   # Eza
   programs.eza.enable = true;
 
+  # nix-index
+  programs.nix-index.enable = true;
+
   # Editor
   programs.helix = {
     enable = true;
@@ -19,8 +27,28 @@
       theme = "rose_pine";
       editor = {
         line-number = "relative";
+        bufferline = "always";
+      };
+      keys = {
+        normal = {
+          "-" = ":w";
+        };
+        insert = {
+          "A-x" = "normal_mode";
+        };
       };
     };
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = lib.getExe pkgs.nixfmt-rfc-style;
+      }
+      {
+        name = "zig";
+        auto-format = true;
+      }
+    ];
   };
 
   # Shell

@@ -1,16 +1,13 @@
 {
   pkgs,
-  nvix,
-  lib,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     # -- GENERAL --
 
     # Terminal (<3 Zig)
     ghostty
-    chromium
-    shader-slang
 
     # Diagnostics
     neofetch
@@ -54,7 +51,6 @@
     # -- DEV --
 
     # Other IDEs
-    jetbrains.idea-ultimate
     vscodium
 
     # Nix Development Environments
@@ -65,9 +61,6 @@
     git
     lazygit
     gh
-
-    # LSPs
-    java-language-server
 
     # Formatters
     nixfmt-rfc-style

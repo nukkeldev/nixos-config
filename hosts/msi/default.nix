@@ -29,6 +29,7 @@ user-args: {
     "nix-command"
     "flakes"
   ];
+  nix.settings.auto-optimise-store = true;
 
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
