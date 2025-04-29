@@ -1,4 +1,7 @@
-user-args: {
+{
+  username,
+  ...
+}: {
   config,
   pkgs,
   lib,
@@ -9,14 +12,12 @@ user-args: {
   # Trusted Users
   nix.settings.trusted-users = [
     "root"
-    "ethw"
+    username
   ];
 
   # Allow specific unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-      # IntelliJ
-      "idea-ultimate"
       # Steam
       "steam"
       "steam-original"
@@ -102,7 +103,7 @@ user-args: {
 
   # Virtualization
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = ["ethw"];
+  users.groups.libvirtd.members = [username];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 
@@ -127,13 +128,13 @@ user-args: {
     enable = true;
     ports = [22];
     settings = {
-      AllowUsers = [user-args.username];
+      AllowUsers = [username];
       UseDns = true;
     };
   };
 
   # Users
-  users.users.${user-args.username} = {
+  users.users.${username} = {
     isNormalUser = true;
     extraGroups = [
       "wheel"

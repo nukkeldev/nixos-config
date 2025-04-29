@@ -10,6 +10,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # -- Host Specific --
+
+    # WSL
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
   outputs =
@@ -29,28 +34,44 @@
       };
     in
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
-      nixosConfigurations = {
-        msi =
-          let
-            username = "ethw";
-            args = { inherit username; };
-          in
-          nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
+    nixosConfigurations = {
+      msi = let
+        username = "ethw";
+        args = {inherit username;};
+      in
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
 
-            modules = [
-              # Host-specific Configuration
-              (import ./hosts/msi args)
+          modules = [
+            # Host-specific Configuration
+            (import ./hosts/msi args)
 
-              # Home Manager
-              home-manager.nixosModules.home-manager
+            # Home Manager
+            home-manager.nixosModules.home-manager
+            (home-manager-configuration args)
+          ];
+        };
+      wsl = let
+        username = "ethw";
+        args = {inherit username;};
+      in
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
 
-              # Home Manager Configuration
-              (home-manager-configuration args)
-            ];
-          };
-      };
+          modules = [
+            # Host-specific Configuration
+            (import ./hosts/wsl args)
+
+            # WSL
+            inputs.nixos-wsl.nixosModules.default
+
+            # Home Manager
+            home-manager.nixosModules.home-manager
+            (home-manager-configuration args)
+          ];
+        };
     };
+  };
 }
