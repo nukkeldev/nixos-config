@@ -34,44 +34,50 @@
       };
     in
     {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
-    nixosConfigurations = {
-      msi = let
-        username = "ethw";
-        args = {inherit username;};
-      in
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+      nixosConfigurations = {
+        msi =
+          let
+            user-args = { 
+              username = "ethw";
+              host = "msi";
+            };
+          in
+          nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
 
-          modules = [
-            # Host-specific Configuration
-            (import ./hosts/msi args)
+            modules = [
+              # Host-specific Configuration
+              (import ./hosts/msi user-args)
 
-            # Home Manager
-            home-manager.nixosModules.home-manager
-            (home-manager-configuration args)
-          ];
-        };
-      wsl = let
-        username = "ethw";
-        args = {inherit username;};
-      in
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+              # Home Manager
+              home-manager.nixosModules.home-manager
+              (home-manager-configuration user-args)
+            ];
+          };
+        wsl =
+          let
+            user-args = { 
+              username = "ethw";
+              host = "wsl";
+            };
+          in
+          nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
 
-          modules = [
-            # Host-specific Configuration
-            (import ./hosts/wsl args)
+            modules = [
+              # Host-specific Configuration
+              (import ./hosts/wsl user-args)
 
-            # WSL
-            inputs.nixos-wsl.nixosModules.default
+              # WSL
+              inputs.nixos-wsl.nixosModules.default
 
-            # Home Manager
-            home-manager.nixosModules.home-manager
-            (home-manager-configuration args)
-          ];
-        };
+              # Home Manager
+              home-manager.nixosModules.home-manager
+              (home-manager-configuration user-args)
+            ];
+          };
+      };
     };
-  };
 }
