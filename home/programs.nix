@@ -65,6 +65,9 @@
     };
   };
 
+  # Jujutsu
+  programs.jujutsu.enable = true;
+
   # Git
   programs.git = {
     enable = true;
