@@ -1,13 +1,15 @@
 {
   username,
   ...
-}: {
+}:
+{
   config,
   pkgs,
   lib,
   ...
-}: {
-  imports = [./hardware-configuration.nix];
+}:
+{
+  imports = [ ./hardware-configuration.nix ];
 
   # Trusted Users
   nix.settings.trusted-users = [
@@ -16,7 +18,8 @@
   ];
 
   # Allow specific unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       # Steam
       "steam"
@@ -45,7 +48,10 @@
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_13;
-  boot.kernelParams = ["perf_event_paranoid=1" "kptr_restrict=0"]; # Allow for profiling
+  boot.kernelParams = [
+    "perf_event_paranoid=1"
+    "kptr_restrict=0"
+  ]; # Allow for profiling
   hardware.enableRedistributableFirmware = true;
 
   # Networking
@@ -103,7 +109,7 @@
 
   # Virtualization
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [username];
+  users.groups.libvirtd.members = [ username ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 
@@ -126,9 +132,9 @@
   # SSH
   services.openssh = {
     enable = true;
-    ports = [22];
+    ports = [ 22 ];
     settings = {
-      AllowUsers = [username];
+      AllowUsers = [ username ];
       UseDns = true;
     };
   };

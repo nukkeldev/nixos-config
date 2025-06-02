@@ -6,6 +6,12 @@
 {
   imports = [ ./modules ];
 
+  # zellij
+  programs.zellij.enable = true;
+
+  # CopyQ
+  services.copyq.enable = true;
+
   # Browser
   programs.firefox.enable = true;
 

@@ -1,4 +1,5 @@
-{self, ...}: {
+{ self, ... }:
+{
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -14,6 +15,7 @@
         "waybar"
         "hypridle"
         "hyprpaper"
+        "copyq --start-server"
       ];
 
       env = [
@@ -81,6 +83,7 @@
         "$mainMod, L, exec, hyprlock"
         "$mainMod SHIFT, C, exec, hyprpicker"
         "$mainMod SHIFT, B, exec, \"killall hyprpaper ; hyprpaper\""
+        "$mainMod, C, exec, copyq toggle"
 
         "$mainMod, tab, exec, ${self + "/scripts/toggle-wofi.sh"}"
 
@@ -150,6 +153,9 @@
         "float, title:^gwenview$"
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+
+        "float, class:^copyq$"
+        "size 20% 40%, class:^copyq$"
       ];
     };
   };
