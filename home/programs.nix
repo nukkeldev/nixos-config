@@ -12,6 +12,13 @@
   # CopyQ
   services.copyq.enable = true;
 
+  # direnv
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   # Browser
   programs.firefox.enable = true;
 
